@@ -1,0 +1,10 @@
+extends layout
+
+append head
+    script(src="/plugin/jquery/dist/jquery.js")
+    script(src='./javascripts/main.js' type='text/javascript')
+    script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
+
+block content
+    h1 Main
+    input.btn(type='button', value='Ranking')#rankButton
