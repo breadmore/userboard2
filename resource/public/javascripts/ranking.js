@@ -19,8 +19,8 @@ $(function () {
 
     var table=$('#rankingTable').DataTable({
         paging:false,
-        processing:true,
-        ordering:false,
+        processing:false,
+        ordering:true,
         serverSide:false,
         searching:true,
         ajax:{
@@ -30,9 +30,9 @@ $(function () {
             }
         },
         columns:[
+            {data:"rank"},
             {data:"nickname"},
-            {data:"score"},
-            {data:"rank"}
+            {data:"score"}
         ]
     });
 

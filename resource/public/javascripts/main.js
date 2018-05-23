@@ -28,10 +28,8 @@ $(function () {
     $("#rankButton").on("click", () => {
         location.href = "/ranking";
     });
-
     $("#playButton").on("click", () => {
         location.href = "/play";
-        
     });
 
     $("#logoutButton").on("click", () => {

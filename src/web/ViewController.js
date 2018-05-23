@@ -15,6 +15,10 @@ router.get('/ranking', function (req, res) {
 
 router.get('/create', function (req,res) {
     res.render('create');
-})
+});
+
+router.get('/play', function (req,res) {
+    res.render('play');
+});
 
 module.exports = router;

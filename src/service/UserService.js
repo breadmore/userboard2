@@ -26,6 +26,14 @@ function createLoginToken(token, id, callback){
 function getRank(callback){
     userDao.getRank(callback);
 }
+
+function updateScore(score,id,callback){
+    userDao.updateScore(score,id,callback);
+}
+
+function getScoreById(id,callback){
+    userDao.getScoreById(id,callback);
+}
 module.exports = {
     selectAllUser:selectAllUser,
     selectAuthById:selectAuthById,
@@ -33,5 +41,7 @@ module.exports = {
     insetTokenToUser:insetTokenToUser,
     getTokenById:getTokenById,
     createLoginToken:createLoginToken,
-    getRank:getRank
+    getRank:getRank,
+    updateScore:updateScore,
+    getScoreById:getScoreById
 }

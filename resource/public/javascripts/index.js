@@ -1,3 +1,5 @@
+localStorage.setItem("token",null);
+
 $(function () {
 
     $("#loginButton").on("click", () => {

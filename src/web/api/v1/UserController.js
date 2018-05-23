@@ -23,15 +23,15 @@ router.route('/user')
             }
             else {
                 if (req.body.pass === result[0].pass) {
-                  userService.createLoginToken(token,req.body.id,function (err,result) {
-                      if(err){
-                          res.status(403).send(err);
-                      }
-                      else{
-                          result=token;
-                          res.status(200).send(result);
-                      }
-                  });
+                    userService.createLoginToken(token, req.body.id, function (err, result) {
+                        if (err) {
+                            res.status(403).send(err);
+                        }
+                        else {
+                            result = token;
+                            res.status(200).send(result);
+                        }
+                    });
                 }
                 else {
                     res.status(401).send(err);
@@ -57,7 +57,7 @@ router.route('/user/:id')
 
 router.route('/create')
     .post(function (req, res) {
-        userService.insertUser(req.body,function (err, result) {
+        userService.insertUser(req.body, function (err, result) {
             if (err) {
                 res.status(401).send(err);
             }
@@ -68,17 +68,17 @@ router.route('/create')
     });
 
 router.route('/token/:token')
-    .get(function (req,res) {
-        jwt.verify(req.params.token, jwt_secret, function(err, decoded) {
-            if(err){
+    .get(function (req, res) {
+        jwt.verify(req.params.token, jwt_secret, function (err, decoded) {
+            if (err) {
                 res.status(400).send(err);
             }
             else {
-                userService.getTokenById(decoded.id, function (err,result) {
-                    if(err){
+                userService.getTokenById(decoded.id, function (err, result) {
+                    if (err) {
                         res.status(401).send(err);
                     }
-                    else{
+                    else {
                         userService.selectAuthById(decoded.id, function (err, result) {
                             res.status(200).send(result);
                         });
@@ -88,17 +88,30 @@ router.route('/token/:token')
         });
     });
 router.route('/rank')
-    .get(function (req,res) {
-        console.log("gedfgdfgdgfdgfdfgfgt");
-        userService.getRank(function (err,result) {
-            if(err){
+    .get(function (req, res) {
+        userService.getRank(function (err, result) {
+            if (err) {
                 res.status(400).send(err);
             }
-            else{
+            else {
                 console.log(result);
                 res.status(200).send(result);
             }
         })
     });
+router.route('/play')
+    .put(function (req, res) {
+        console.log("test");
+        console.log(req.body);
+        userService.updateScore(req.body.score, req.body.id, function (err, result) {
+            if (err) {
+                res.status(400).send(err);
+            }
+            else {
+                res.status(200).send(result);
+            }
+        })
+    });
+
 
 module.exports = router;
