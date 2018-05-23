@@ -1,4 +1,4 @@
-localStorage.setItem("token",null);
+localStorage.removeItem("token");
 
 $(function () {
 
@@ -24,7 +24,7 @@ $(function () {
                     },
                     error: function (err) {
 
-                        alert("ERROR");
+                        alert("Login Error");
                     }
                 }
             )

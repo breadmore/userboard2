@@ -31,18 +31,11 @@ var Users = {
         return db.query('UPDATE user SET token= ? WHERE id=?',[token,id],callback);
     },
 
-    insetTokenToUser: function (token,id,callback) {
-        return db.query('UPDATE user SET token= ? WHERE id=?',token,id,callback);
-    },
-
     getTokenById:function (id,callback) {
       return db.query('select token from user where id = ?',id,callback);
     },
     getRank:function (callback) {
         return db.query('SELECT nickname ,score, FIND_IN_SET( score, (SELECT GROUP_CONCAT( score ORDER BY score DESC )FROM user )) AS rank FROM user',callback);
-    },
-    getScoreById:function(id,callback){
-        return db.query('select score from user where id=?',id,callback);
     },
     updateScore:function (score,id, callback) {
         return db.query('update user set score=? where id=?',[score,id],callback);

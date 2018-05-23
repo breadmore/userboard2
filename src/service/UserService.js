@@ -12,9 +12,7 @@ function insertUser(user,token,callback) {
     userDao.insertUser(user,token,callback);
 }
 
-function insetTokenToUser(token,id,callback){
-    userDao.insetTokenToUser(token,id,callback);
-}
+
 function getTokenById(id,callback){
     userDao.getTokenById(id,callback);
 }
@@ -31,17 +29,13 @@ function updateScore(score,id,callback){
     userDao.updateScore(score,id,callback);
 }
 
-function getScoreById(id,callback){
-    userDao.getScoreById(id,callback);
-}
+
 module.exports = {
     selectAllUser:selectAllUser,
     selectAuthById:selectAuthById,
     insertUser:insertUser,
-    insetTokenToUser:insetTokenToUser,
     getTokenById:getTokenById,
     createLoginToken:createLoginToken,
     getRank:getRank,
-    updateScore:updateScore,
-    getScoreById:getScoreById
+    updateScore:updateScore
 }

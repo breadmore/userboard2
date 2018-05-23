@@ -14,8 +14,8 @@ router.route('/user')
         })
     })
     .post(function (req, res) {
-        var header = {"algorithm": "HS256"}
-        var payload = JSON.stringify(req.body);
+        var header = {"algorithm": "HS256"};
+        var payload = req.body.id;
         var token = jwt.sign(payload, jwt_secret, header, {"expiresIn": "1h"});
         userService.selectAuthById(req.body.id, function (err, result) {
             if (err) {
@@ -71,15 +71,17 @@ router.route('/token/:token')
     .get(function (req, res) {
         jwt.verify(req.params.token, jwt_secret, function (err, decoded) {
             if (err) {
+                console.log("verify error");
                 res.status(400).send(err);
             }
             else {
-                userService.getTokenById(decoded.id, function (err, result) {
+                userService.getTokenById(decoded, function (err, result) {
                     if (err) {
+                        console.log("get error");
                         res.status(401).send(err);
                     }
                     else {
-                        userService.selectAuthById(decoded.id, function (err, result) {
+                        userService.selectAuthById(decoded, function (err, result) {
                             res.status(200).send(result);
                         });
                     }

@@ -1,6 +1,3 @@
-
-console.log(localStorage.getItem("token"));
-
 var successResult;
 
 
@@ -9,13 +6,9 @@ var successResult;
         type: "get",
         success: function (result) {
             successResult=result;
-            $(function () {
-
-
-            });
         },
         error: function (err) {
-            alert("ERROR");
+            alert("Access Error");
             location.href = "/";
         }
     });
@@ -33,7 +26,7 @@ $(function () {
     });
 
     $("#logoutButton").on("click", () => {
-        localStorage.setItem("token",null);
+        localStorage.removeItem("token");
         location.href = "/";
     });
 });
