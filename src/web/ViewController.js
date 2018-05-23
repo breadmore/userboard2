@@ -1,11 +1,11 @@
 var router = require('express').Router();
-var fs = require('fs');
-var path = require('path');
+// var fs = require('fs');
+// var path = require('path');
 
 router.get('/', function (req, res) {
     res.render('index');
 });
-router.get('/main/:token', function (req, res) {
+router.get('/main', function (req, res) {
     res.render('main');
 });
 

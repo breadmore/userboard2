@@ -37,6 +37,9 @@ var Users = {
 
     getTokenById:function (id,callback) {
       return db.query('select token from user where id = ?',id,callback);
+    },
+    getRank:function (callback) {
+        return db.query('SELECT nickname ,score, FIND_IN_SET( score, (SELECT GROUP_CONCAT( score ORDER BY score DESC )FROM user )) AS rank FROM user',callback);
     }
 
 };

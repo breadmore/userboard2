@@ -2,6 +2,7 @@ extends layout
 
 append head
     script(src="/plugin/jquery/dist/jquery.js")
+    link(rel='stylesheet', type='text/css', href='/css/ranking.css')
     script(src='./javascripts/ranking.js' type='text/javascript')
     script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
     script(type='text/javascript', src='/plugin/datatables-1.10.16/js/datatables.js')
@@ -9,3 +10,12 @@ append head
     link(rel='stylesheet', type='text/css', href='/plugin/datatables-1.10.16/css/dataTables.css')
 
 block content
+    input.btn(type='button', value='Logout' style='float:right')#logoutButton
+    table#rankingTable
+        thead
+            tr
+                th Nickname
+                th Score
+                th Ranking
+
+    input.btn(type='button', value='Return')#returnButton

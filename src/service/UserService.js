@@ -22,11 +22,16 @@ function getTokenById(id,callback){
 function createLoginToken(token, id, callback){
     userDao.createLoginToken(token,id,callback);
 }
+
+function getRank(callback){
+    userDao.getRank(callback);
+}
 module.exports = {
     selectAllUser:selectAllUser,
     selectAuthById:selectAuthById,
     insertUser:insertUser,
     insetTokenToUser:insetTokenToUser,
     getTokenById:getTokenById,
-    createLoginToken:createLoginToken
+    createLoginToken:createLoginToken,
+    getRank:getRank
 }

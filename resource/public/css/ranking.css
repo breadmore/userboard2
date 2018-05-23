@@ -1,0 +1,73 @@
+#securityTable {
+    border-collapse: separate;
+    border-spacing: 3px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#rankingTable th {
+    padding: 10px;
+    font-size: 11px;
+}
+
+#rankingTable td {
+    padding: 5px;
+    vertical-align: middle;
+    border-bottom: 1px solid #deceb2;
+    font-size: 10px;
+}
+
+#rankingTable thead {
+    background-color: #ebeff5;
+    color: rgb(0, 0, 0);
+}
+
+#rankingTable tbody .selected {
+    /*background-color: #fcf9f9;*/
+    background-color: #f4f0f0;
+}
+
+#rankingEventTable {
+    border-collapse: separate;
+    border-spacing: 3px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#rankingEventTable th {
+    padding: 10px;
+    font-size: 11px;
+}
+
+#rankingEventTable td {
+    padding: 5px;
+    vertical-align: middle;
+    border-bottom: 1px solid #deceb2;
+    font-size: 10px;
+}
+
+#rankingEventTable thead {
+    background-color: #ebeff5;
+    color: rgb(0, 0, 0);
+}
+
+#rankingEventTable tbody .selected {
+    background-color: #fcf9f9;
+}
+
+div .dataTables_paginate {
+    float: right;
+    position: relative;
+    left: -50%; /* or right 50% */
+    text-align: left;
+}
+
+div .dataTables_paginate > .pagination {
+    position: relative;
+    left: 50%;
+}
+
+#rankingTable_wrapper {
+    padding: 0;
+    margin: auto;
+}

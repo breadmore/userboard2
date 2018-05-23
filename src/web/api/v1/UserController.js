@@ -1,11 +1,9 @@
 var router = require('express').Router();
 var jwt = require('jsonwebtoken');
-var crypto = require('crypto');
 var userService = require('../../../service/UserService');
 var jwt_secret = 'secret';
-router.route('/')
+router.route('/user')
     .get(function (req, res) {
-
         userService.selectAllUser(function (err, result) {
             if (err) {
                 res.status(401).send(err);
@@ -43,7 +41,7 @@ router.route('/')
     });
 
 
-router.route('/:id')
+router.route('/user/:id')
     .get(function (req, res) {
         userService.selectAuthById(req.params.id, function (err, result) {
             if (err) {
@@ -54,7 +52,7 @@ router.route('/:id')
             }
 
         })
-    })
+    });
 
 
 router.route('/create')
@@ -68,4 +66,39 @@ router.route('/create')
             }
         })
     });
+
+router.route('/token/:token')
+    .get(function (req,res) {
+        jwt.verify(req.params.token, jwt_secret, function(err, decoded) {
+            if(err){
+                res.status(400).send(err);
+            }
+            else {
+                userService.getTokenById(decoded.id, function (err,result) {
+                    if(err){
+                        res.status(401).send(err);
+                    }
+                    else{
+                        userService.selectAuthById(decoded.id, function (err, result) {
+                            res.status(200).send(result);
+                        });
+                    }
+                })
+            }
+        });
+    });
+router.route('/rank')
+    .get(function (req,res) {
+        console.log("gedfgdfgdgfdgfdfgfgt");
+        userService.getRank(function (err,result) {
+            if(err){
+                res.status(400).send(err);
+            }
+            else{
+                console.log(result);
+                res.status(200).send(result);
+            }
+        })
+    });
+
 module.exports = router;

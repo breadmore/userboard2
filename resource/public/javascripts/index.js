@@ -13,13 +13,12 @@ $(function () {
         }
         else {
             $.ajax({
-                    url: "/api/v1/users/",
+                    url: "/api/v1/users/user",
                     type: "post",
                     data: loginData,
                     success: function (token) {
-                        console.log("success");
-                        console.log(token);
-                            location.href = "/main/"+token;
+                        localStorage.setItem("token",token);
+                            location.href = "/main";
                     },
                     error: function (err) {
 
