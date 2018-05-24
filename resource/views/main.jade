@@ -6,8 +6,10 @@ append head
     script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
 
 block content
-    h1 Main
-    p#playerName
-    p#playerScore
-    input.btn(type='button', value='Ranking')#rankButton
-    input.btn(type='button', value='Play')#playButton
+    .div-main#div-main
+        h1 Main
+        h3#playerName
+        h3#playerScore
+        input.btn(type='button', value='Ranking')#rankButton
+        input.btn(type='button', value='Play')#playButton
+        input.btn(type='button', value='Chat')#chatButton
