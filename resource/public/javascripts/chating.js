@@ -14,7 +14,7 @@ $.ajax({
 
 $(function () {
 
-    var socket=io.connect('/');
+    var socket=io();
 
     socket.emit('login',{
         name:successResult[0].nickname,
