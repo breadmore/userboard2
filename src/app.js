@@ -1,13 +1,16 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
+const port=process.env.PORT || 3000;
 
 var resourcePath = path.join(__dirname, '../resource');
+
 
 // view engine setup
 app.set('views', path.join(resourcePath, '/views'));
@@ -23,5 +26,43 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./web/ViewController'));
 app.use("/api", require('./web/ApiController'));
 app.use("/v1",require('./web/api/v1/V1Controller'));
+
+
+io.on('connection', function (socket) {
+    socket.on('login',function (data) {
+        console.log('name: '+data.name + ' userid: '+data.userid);
+
+        socket.name = data.name;
+        socket.userid=data.userid;
+
+        io.emit('login', data.name);
+    });
+
+    socket.on('chat', function (data) {
+        console.log('Message from '+socket.name);
+
+        var msg={
+            from:{
+                name:socket.name,
+                userid:socket.userid
+            },
+            msg:data.msg
+        };
+
+        socket.broadcast.emit('chat', msg);
+    });
+
+    socket.on('forceDisconnect', function() {
+        socket.disconnect();
+    })
+
+    socket.on('disconnect', function() {
+        console.log('user disconnected: ' + socket.name);
+    });
+});
+
+server.listen(port,function () {
+    console.log("hello");
+});
 
 module.exports = app;

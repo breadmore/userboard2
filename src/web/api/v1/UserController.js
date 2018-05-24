@@ -103,8 +103,6 @@ router.route('/rank')
     });
 router.route('/play')
     .put(function (req, res) {
-        console.log("test");
-        console.log(req.body);
         userService.updateScore(req.body.score, req.body.id, function (err, result) {
             if (err) {
                 res.status(400).send(err);

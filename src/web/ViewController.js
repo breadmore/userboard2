@@ -21,4 +21,7 @@ router.get('/play', function (req,res) {
     res.render('play');
 });
 
+router.get('/chating',function (req,res) {
+    res.render('chating');
+})
 module.exports = router;

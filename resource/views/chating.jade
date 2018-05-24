@@ -1,0 +1,21 @@
+extends layout
+
+append head
+    script(src='/plugin/socket.io/socketio.min.js')
+    script(src="/plugin/jquery/dist/jquery.js")
+    script(src='./javascripts/chating.js' type='text/javascript')
+    script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
+block content
+    canvas#myCanvas(width='300', height='300', style='border:1px solid #000000;')
+        ul#text
+            li what?
+    canvas#myCanvas2(width='150', height='300', style='border:1px solid #000000;')
+
+    .container
+        form.form-inline
+            .form-group
+                label(for='msgForm') Message:
+                input#msgForm.form-control(type='text')
+                button.btn.btn-primary(type='submit') Send
+        #chatLogs
+

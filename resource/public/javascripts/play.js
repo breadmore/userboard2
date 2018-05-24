@@ -31,7 +31,10 @@ $(function () {
         startGame();
         $('#playButton').hide();
     });
-
+    $("#logoutButton").on("click", () => {
+        localStorage.removeItem("token");
+        location.href = "/";
+    });
     $("#saveButton").on("click", () => {
         var dataObj = {
             id: successResult[0].id,

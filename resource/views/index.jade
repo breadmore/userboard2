@@ -1,12 +1,10 @@
-extends layout
-
-append head
+doctype html
+html
+    head
         script(src="/plugin/jquery/dist/jquery.js")
         script(src='./javascripts/index.js' type='text/javascript')
         script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
-
-
-block content
+    body
         h1 hello
         .id
             input.textbox(type="text" placeholder="ID")#id
