@@ -5,9 +5,7 @@ $.ajax({
     type: "get",
     success: function (result) {
         successResult=result;
-        alert("nope");
         $(function () {
-            alert("ready");
             $('#playerName').append(successResult[0].nickname);
             $('#playerScore').append(successResult[0].score);
 
@@ -20,8 +18,6 @@ $.ajax({
             $("#chatButton").on("click", () => {
                 location.href = "/chating";
             });
-
-
             $("#logoutButton").on("click", () => {
                 localStorage.removeItem("token");
                 location.href = "/";

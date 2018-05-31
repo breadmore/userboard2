@@ -1,0 +1,10 @@
+
+button.btn{
+    width: 15rem;
+    height: 3rem;
+    top:85%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    position: absolute;
+    display:none;
+}

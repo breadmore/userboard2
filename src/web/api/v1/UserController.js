@@ -69,26 +69,29 @@ router.route('/create')
 
 router.route('/token/:token')
     .get(function (req, res) {
-        jwt.verify(req.params.token, jwt_secret, function (err, decoded) {
-            if (err) {
-                console.log("verify error");
-                res.status(400).send(err);
-            }
-            else {
-                userService.getTokenById(decoded, function (err, result) {
-                    if (err) {
-                        console.log("get error");
-                        res.status(401).send(err);
-                    }
-                    else {
-                        userService.selectAuthById(decoded, function (err, result) {
-                            res.status(200).send(result);
-                        });
-                    }
-                })
-            }
-        });
+        if(req.params.token!=='null') {
+            jwt.verify(req.params.token, jwt_secret, function (err, decoded) {
+                if (err) {
+                    console.log("verify error");
+                    res.status(400).send(err);
+                }
+                else {
+                    userService.getTokenById(decoded, function (err, result) {
+                        if (err) {
+                            console.log("get error");
+                            res.status(401).send(err);
+                        }
+                        else {
+                            userService.selectAuthById(decoded, function (err, result) {
+                                res.status(200).send(result);
+                            });
+                        }
+                    })
+                }
+            });
+        }
     });
+
 router.route('/rank')
     .get(function (req, res) {
         userService.getRank(function (err, result) {
@@ -96,7 +99,6 @@ router.route('/rank')
                 res.status(400).send(err);
             }
             else {
-                console.log(result);
                 res.status(200).send(result);
             }
         })
@@ -112,6 +114,5 @@ router.route('/play')
             }
         })
     });
-
 
 module.exports = router;

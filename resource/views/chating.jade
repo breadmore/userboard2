@@ -2,12 +2,13 @@ extends layout
 
 append head
     script(src='/plugin/socket.io/socketio.min.js')
+    link(rel='stylesheet', href='/css/chating.css')
     script(src="/plugin/jquery/dist/jquery.js")
     script(src='./javascripts/chating.js' type='text/javascript')
     script(rel='javascript/text' src="/plugin/bootstrap/dist/js/bootstrap.js")
 block content
-    //textarea#myText(rows="20" ,cols="80", style='border:1px solid #000000')
-    //textarea#myText2(rows="20" ,cols="20", style='border:1px solid #000000')
+    textarea#myText(rows="20" ,cols="80",readonly="readonly"  style='border:1px solid #000000')
+    textarea#myText2(rows="20" ,cols="20",readonly="readonly" style='border:1px solid #000000')
     .container
         form.form-inline
             .form-group

@@ -6,7 +6,6 @@ var logger = require('morgan');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-
 const port=process.env.PORT || 3000;
 
 var resourcePath = path.join(__dirname, '../resource');
@@ -30,26 +29,23 @@ app.use("/v1",require('./web/api/v1/V1Controller'));
 
 io.on('connection', function (socket) {
     socket.on('login',function (data) {
-        console.log('name: '+data.name + ' userid: '+data.userid);
-
+        //console.log('name: '+data.name + ' userid: '+data.userid);
+        socket.access=data.access;
         socket.name = data.name;
         socket.userid=data.userid;
 
-        io.emit('login', data.name);
+        io.emit('login', data);
     });
 
     socket.on('chat', function (data) {
-        console.log('Message from '+socket.name);
+        //console.log('Message from '+socket.name +": "+data.msg);
 
         var msg={
-            from:{
-                name:socket.name,
-                userid:socket.userid
-            },
+            name:socket.name,
             msg:data.msg
         };
 
-        socket.broadcast.emit('chat', msg);
+        io.emit('chat', msg);
     });
 
     socket.on('forceDisconnect', function() {
@@ -58,11 +54,11 @@ io.on('connection', function (socket) {
 
     socket.on('disconnect', function() {
         console.log('user disconnected: ' + socket.name);
+        io.emit('goodbye',socket.userid);
     });
 });
 
 server.listen(port,function () {
-    console.log("hello");
 });
 
 module.exports = app;

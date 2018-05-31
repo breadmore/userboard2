@@ -36,12 +36,11 @@ $(function () {
         ]
     });
 
-    $("#returnButton").on("click", () => {
-        location.href = "/main";
-    });
     $("#logoutButton").on("click", () => {
         localStorage.setItem("token",null);
         location.href = "/";
     });
-
+    $("#mainButton").on("click", () => {
+        location.href = "/main";
+    });
 });

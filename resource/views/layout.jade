@@ -3,7 +3,11 @@ html
   head
     title welcome
     link(rel='stylesheet', href='/css/layout.css')
+    link(rel='stylesheet', href='/css/common.css')
     block head
   body
-    input.btn(type='button', value='Logout' style='float:right')#logoutButton
-    block content
+    input.btn(type='button', value='Logout' style='right: 10px;top: 10px; position: absolute; float:right')#logoutButton
+    input.btn(type='button', value='Main' style='font-size:25px; width: 15rem; height:3rem; left: 50% transform: translate(-50%, -50%);;top: 10px; position: absolute;')#mainButton
+    .main-content
+      br
+      block content

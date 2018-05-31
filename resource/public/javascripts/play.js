@@ -30,10 +30,14 @@ $(function () {
     $("#playButton").on("click", () => {
         startGame();
         $('#playButton').hide();
+        $('#accButton').show();
     });
     $("#logoutButton").on("click", () => {
         localStorage.removeItem("token");
         location.href = "/";
+    });
+    $("#mainButton").on("click", () => {
+        location.href = "/main";
     });
     $("#saveButton").on("click", () => {
         var dataObj = {
@@ -60,6 +64,21 @@ $(function () {
             location.href = '/main';
         }
     });
+
+
+    $(document).keydown(function (event) {
+        if(event.keyCode=='32'){
+            // $('#accButton').click();
+            accelerate(-0.2);
+        }
+    });
+    $(document).keyup(function (event) {
+        if(event.keyCode=='32'){
+            accelerate(0.05);
+        }
+    });
+
+
 
 });
 
