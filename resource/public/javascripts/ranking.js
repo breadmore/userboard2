@@ -1,6 +1,11 @@
 
 var successResult;
 
+if(localStorage.getItem("token")==null){
+    alert("로그인을 해주세요");
+    location.href = "/";
+}
+
 $.ajax({
     url: "/api/v1/users/token/" + localStorage.getItem("token"),
     type: "get",
@@ -10,7 +15,7 @@ $.ajax({
         })
     },
     error: function (err) {
-        alert("ERROR");
+        alert("Access ERROR");
         location.href = "/";
     }
 });

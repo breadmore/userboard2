@@ -2,9 +2,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var con = require('../src/db/database');
+
 
 var app = express();
 var server = require('http').createServer(app);
+var https=require('https');
 var io = require('socket.io')(server);
 const port=process.env.PORT || 3000;
 
@@ -28,18 +31,31 @@ app.use("/v1",require('./web/api/v1/V1Controller'));
 
 
 io.on('connection', function (socket) {
+
+    /**
+     * $.ajax({
+                    url: '/api/v1/chat/join',
+                    type: 'post',
+                    data: data,
+                    success: function () {
+                        showList(text);
+                        $("#myText").append("[" + data.name + "] has joined\n");
+                    },
+                    error: function () {
+                        showList(text);
+                        $("#myText").append("[" + data.name + "] has joined\n");
+                    }
+                });
+     */
     socket.on('login',function (data) {
-        //console.log('name: '+data.name + ' userid: '+data.userid);
-        socket.access=data.access;
         socket.name = data.name;
         socket.userid=data.userid;
 
         io.emit('login', data);
     });
 
-    socket.on('chat', function (data) {
-        //console.log('Message from '+socket.name +": "+data.msg);
 
+    socket.on('chat', function (data) {
         var msg={
             name:socket.name,
             msg:data.msg
@@ -53,8 +69,10 @@ io.on('connection', function (socket) {
     })
 
     socket.on('disconnect', function() {
-        console.log('user disconnected: ' + socket.name);
-        io.emit('goodbye',socket.userid);
+        con.query('delete from chatroom where id=?',socket.userid,function (err,rows) {
+            if(err) throw err;
+            console.log(rows);
+        });
     });
 });
 

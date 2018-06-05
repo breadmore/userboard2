@@ -10,7 +10,7 @@ $.ajax({
         location.href = "/main";
     },
     error: function (err) {
-
+        location.href = "/"
     }
 });
 
@@ -54,8 +54,7 @@ function login() {
                     location.href = "/main";
                 },
                 error: function (err) {
-
-                    alert("Login Error");
+                    location.href = "/";
                 }
             }
         )

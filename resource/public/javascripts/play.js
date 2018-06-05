@@ -1,6 +1,11 @@
 var successResult;
 var updateScore = 0;
 var currentScore;
+
+if(localStorage.getItem("token")==null){
+    alert("로그인을 해주세요");
+    location.href = "/";
+}
 $.ajax({
     url: "/api/v1/users/token/" + localStorage.getItem("token"),
     type: "get",
@@ -13,7 +18,8 @@ $.ajax({
                 currentScore = result[0].score;
             },
             error: function (err) {
-                alert("fail");
+                alert("Access Error");
+
             }
 
 
@@ -138,8 +144,13 @@ function component(width, height, color, x, y, type) {
     }
     this.hitBottom = function () {
         var rockbottom = myGameArea.canvas.height - this.height;
+        var rocktop=myGameArea.canvas.height;
         if (this.y > rockbottom) {
             this.y = rockbottom;
+            this.gravitySpeed = 0;
+        }
+        if(15>this.y){
+            this.y = 15;
             this.gravitySpeed = 0;
         }
     }

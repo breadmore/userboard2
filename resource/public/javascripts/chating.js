@@ -1,10 +1,14 @@
 var successResult;
-var refreshUser=false;
 
+if(localStorage.getItem("token")==null) {
+    alert("로그인을 해주세요");
+    location.href = "/";
+}
 $.ajax({
     url: "/api/v1/users/token/" + localStorage.getItem("token"),
     type: "get",
     success: function (result) {
+
         successResult = result;
         if (document.readyState == "complete") {
             console.log('refresh');
@@ -17,25 +21,24 @@ $.ajax({
             console.log('ready');
 
             socket.emit('login', {
-                access:false,
                 name: successResult[0].nickname,
                 userid: successResult[0].id
             });
 
             socket.on("login", function (data) {
-                        $.ajax({
-                            url: '/api/v1/chat/join',
-                            type: 'post',
-                            data: data,
-                            success: function () {
-                                showList(text);
-                                $("#myText").append("[" + data.name + "] has joined\n");
-                            },
-                            error:function () {
-                                showList(text);
-                                $("#myText").append("[" + data.name + "] has joined\n");
-                            }
-                        });
+                $.ajax({
+                    url: '/api/v1/chat/join',
+                    type: 'post',
+                    data: data,
+                    success: function () {
+                        showList(text);
+                        $("#myText").append("[" + data.name + "] has joined\n");
+                    },
+                    error: function () {
+                        showList(text);
+                        $("#myText").append("[" + data.name + "] has joined\n");
+                    }
+                });
             });
 
             socket.on("chat", function (data) {
@@ -56,36 +59,25 @@ $.ajax({
                     }
                 });
             }
-
-            disconnect(socket,text);
-
-            $(window).bind("beforeunload", function (e) {
-                disconnect(socket, text);
-            });
-
             $("#logoutButton").on("click", () => {
-
                 localStorage.removeItem("token");
                 location.href = "/";
+
             });
             $("#mainButton").on("click", () => {
-                window.open('','_parent','');
-                window.close();
+                location.href = "/main";
             });
+
 
         });
 
     },
     error: function (err) {
         alert("Access Error");
-        location.href = "/";
     }
 });
 
-$(window).on('load', function(){
-    console.log('load');
 
-})
 function showList(text) {
     $.ajax({
         url: '/api/v1/chat/list',
@@ -104,6 +96,8 @@ function showList(text) {
 
 function disconnect(socket, text) {
     socket.on('goodbye', function (data) {
+        alert('good');
+        console.log("hey");
         $.ajax({
             url: '/api/v1/chat/exit/' + data,
             type: 'delete'
@@ -111,4 +105,5 @@ function disconnect(socket, text) {
         text = '';
         showList(text);
     });
+
 }
