@@ -71,7 +71,6 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function() {
         con.query('delete from chatroom where id=?',socket.userid,function (err,rows) {
             if(err) throw err;
-            console.log(rows);
         });
     });
 });

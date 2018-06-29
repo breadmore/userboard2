@@ -28,6 +28,9 @@ else {
                     localStorage.removeItem("token");
                     location.href = "/";
                 });
+                $("#todoButton").on("click", () => {
+                    location.href = "/todo";
+                });
             });
         },
         error: function (err) {

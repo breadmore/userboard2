@@ -1,9 +1,9 @@
 var router = require('express').Router();
-var chatService=require('../../../service/ChatService');
+var todoService=require('../../../service/TodoService');
 
-router.route('/list')
+router.route('/list/:id')
     .get(function (req,res) {
-        chatService.getAllUser(function (err,result) {
+        todoService.getListById(req.params.id,function (err,result) {
             if(err){
                 res.status(400).send(err);
             }
@@ -13,29 +13,40 @@ router.route('/list')
         })
     })
 
-router.route('/join')
+router.route('/add')
     .post(function (req,res) {
-        chatService.joinUser(req.body,function (err,result) {
+        todoService.addTodo(req.body, todo,function (err,result) {
             if(err){
-
                 res.status(400).send(err);
             }
             else{
                 res.status(200).send(result);
             }
         })
-    });
+    })
 
-router.route('/exit/:id')
+router.route('/delete')
     .delete(function (req,res) {
-        chatService.exitUserById(req.params.id,function (err,result) {
+        todoService.deleteTodoById(id,function (err,result) {
             if(err){
                 res.status(400).send(err);
             }
             else{
                 res.status(200).send(result);
-
             }
         })
-    });
+    })
+
+router.route('/complete')
+    .get(function (req,res) {
+        todoService.completeTodo(function (err,result) {
+            if(err){
+                res.status(400).send(err);
+            }
+            else{
+                res.status(200).send(result);
+            }
+        })
+    })
+
 module.exports=router;

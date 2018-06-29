@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title Template • TodoMVC
+        link(rel='stylesheet', href='/css/todo.css')
+        script(src="/plugin/jquery/dist/jquery.js")
+        script(src='./javascripts/todo.js' type='text/javascript')
+    body
+        input.btn(type='button', value='Logout' style='right: 10px;top: 10px; position: absolute; float:right')#logoutButton
+        input.btn(type='button', value='Main' style='font-size:25px; width: 15rem; height:3rem; left: 50% transform: translate(-50%, -50%);top: 10px; position: absolute;')#mainButton
+
+        section.todoapp
+            header.header
+                input.new-todo(placeholder='What needs to be done?', autofocus='')
+            section.main
+                input.toggle-all(type='checkbox')
+                label(for='toggle-all') Mark all as complete
+                ul.todo-list
+                    li.completed
+                        .view
+                            input.toggle(type='checkbox', checked='')
+                            label Taste JavaScript
+                            button.destroy
+                        input.edit(value='Create a TodoMVC template')
+            footer.footer
+                span.todo-count
+                    strong 0
+                    |  item left
+                ul.filters
+                    li
+                        a.selected(href='#/') All
+                    li
+                        a(href='#/active') Active
+                    li
+                        a(href='#/completed') Completed
+                // Hidden if no completed items are left ↓
+                button.clear-completed Clear completed

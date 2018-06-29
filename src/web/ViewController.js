@@ -23,5 +23,10 @@ router.get('/play', function (req,res) {
 
 router.get('/chating',function (req,res) {
     res.render('chating');
-})
+});
+
+router.get('/todo',function (req,res) {
+    res.render('todo');
+});
+
 module.exports = router;
